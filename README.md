@@ -50,5 +50,5 @@ const ExampleClass = importModule('modules/example');
 
 const example = new ExampleClass();
 let result = await example.doSomething();
-Script.complete(result)
+Script.setShortcutOutput(result)
 ```
