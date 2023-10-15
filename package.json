@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@types/scriptable-ios": "^1.7.2",
+    "typescript": "^5.2.2"
+  },
+  "name": "pacorain-scriptable-modules",
+  "description": "A collection of modules for Scriptable.app",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "scripts": {
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pacorain/scriptable-modules.git"
+  },
+  "keywords": [
+    "scriptable"
+  ],
+  "author": "Austin Rainwater <hey@paco.wtf>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pacorain/scriptable-modules/issues"
+  },
+  "homepage": "https://github.com/pacorain/scriptable-modules#readme"
+}
