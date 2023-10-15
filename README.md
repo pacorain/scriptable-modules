@@ -52,3 +52,5 @@ const example = new ExampleClass();
 let result = await example.doSomething();
 Script.setShortcutOutput(result)
 ```
+
+![Example shortcut](img/shortcut.png)
