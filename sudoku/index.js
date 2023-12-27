@@ -5,7 +5,7 @@
  * For example, if trying to reach 10 with 2 cells, and the possible digits in the cells are 
  * 1, 2, 3, 5, 7, and 8, the possible combinations are [2, 8] and [3, 7].
 **/ 
-export function printCombos(digits, numCells, target) {
+function printCombos(digits, numCells, target) {
   let candidates = getCandidates(digits, numCells)
   for (var candidate of candidates) {
     if (sum(candidate) == target) {
@@ -71,4 +71,8 @@ function testGetCandidates() {
       console.error(`Expected ${JSON.stringify(test.expected)} but got ${JSON.stringify(actual)}`)
     }
   }
+}
+
+module.exports = {
+    printCombos
 }
