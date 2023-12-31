@@ -1,4 +1,4 @@
-import { ActivityInventory }  from '../pomodoro/index';
+import { ActivityInventory }  from '../pomodoro';
 
 describe('ActivityInventory', () => {
     it('should initialize with no tasks', async () => {
