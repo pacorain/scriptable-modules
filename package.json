@@ -18,7 +18,9 @@
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "serve": "MODULE_OUTPUT_DIR=${SCRIPTABLE_DIR:-~/Library/Mobile\\ Documents/iCloud\\~dk\\~simonbs\\~Scriptable/Documents}/modules npm run build",
+    "build:watch": "rollup --config rollup.config.js --watch",
+    "install-modules": "MODULE_OUTPUT_DIR=${SCRIPTABLE_DIR:-~/Library/Mobile\\ Documents/iCloud\\~dk\\~simonbs\\~Scriptable/Documents}/modules npm run build",
+    "install-modules:watch": "MODULE_OUTPUT_DIR=${SCRIPTABLE_DIR:-~/Library/Mobile\\ Documents/iCloud\\~dk\\~simonbs\\~Scriptable/Documents}/modules npm run build:watch",
     "test": "jest"
   },
   "repository": {

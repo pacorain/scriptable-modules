@@ -1,5 +1,7 @@
 import { ActivityInventory }  from '../src/pomodoro';
 
+jest.mock('scriptable-ios')
+
 describe('ActivityInventory', () => {
     it('should initialize with no tasks', async () => {
         let inventory = new ActivityInventory();
