@@ -2,7 +2,7 @@
 
 ## About
 
-These are some TypeScript modules I've written to be used with the 
+These are some JavaScript and TypeScript modules I've written to be used with the 
 [Scriptable](https://scriptable.app) app for iOS. 
 
 They do not show up as standalone scripts in the Scriptable app, nor do they add TypeScript 
@@ -22,6 +22,19 @@ This takes advantage of how [importModule](https://docs.scriptable.app/importmod
 modules in various locations.
 
 ## Usage
+
+** This is changing, and this documentation is being updated.**
+
+This repo uses rollup to compile TypeScript modules into self-contained JavaScript files. To use the modules, copy them to your Scriptable folder on iCloud Drive. You can copy them into a folder, e.g. `modules`, to reduce clutter. It would be easiest to do this with Finder, but you can also do it in a Terminal:
+
+```bash
+# Be aware that this path may change
+cd ~/Library/Mobile\ Documents/iCloud\~dk\~simonbs\~Scriptable/Documents
+mkdir modules
+cp path/to/downloaded/module.js modules
+```
+
+**Deprecated description:**
 
 The recommended way to use this repo is to fork it, clone your fork into the Scriptable folder
 on your iCloud drive. 
