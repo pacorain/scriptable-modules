@@ -3,7 +3,7 @@ import glob from 'glob';
 import fs from 'fs';
 import typescript from '@rollup/plugin-typescript';
 
-const moduleJsonFiles = glob.sync('**/module.json');
+const moduleJsonFiles = glob.sync('src/**/module.json');
 const directories = moduleJsonFiles.map(file => path.dirname(file));
 
 // Get output directory from environment variable SCRIPTABLE_OUTPUT_DIR or default to 'dist'
