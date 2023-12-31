@@ -28,16 +28,22 @@ modules in various locations.
 
 ## Usage
 
-If you just want the modules as is, you can download the JavaScript files from the [dist](dist) folder. See the [Scriptable documentation](https://docs.scriptable.app/importmodule/) for more information on where to put them and how to import them. Each module has a `README.md` file with more information on how to use the APIs.
+If you just want the modules as is, you can download the JavaScript files from the [dist](dist) folder. There are a few ways to copy them, but the easiest way would be to use Finder to copy the files from their downloaded location to the Scriptable folder on iCloud. See the [Scriptable documentation](https://docs.scriptable.app/importmodule/) for more information on where to put them and how to import them. 
+
+Most modules have a `README.md` file with more information on how to use the APIs.
 
 If you want to build from or edit the source, you will need to install [NodeJS](https://nodejs.org/en/). Then, you can run the following commands to install dependencies and build the modules:
 
 ```bash
+git clone https://github.com/pacorain/scriptable-modules.git
+cd scriptable-modules
 npm install
 npm run build
 ```
 
-You can also run `npm run install-modules` to copy the modules to the Scriptable folder on your iCloud drive, inside a `modules` subdirectory. This is useful if you want to use the modules in Shortcuts inline scripts.
+You can also run `npm run install-modules` to copy the modules to the Scriptable folder on your iCloud drive, inside a `modules` subdirectory. This is useful if you want to use the modules in Shortcuts inline scripts. This obviously requires that you are on a Mac and signed into iCloud Drive. 
+
+You can also just have the modules built in a different folder by setting the `MODULE_OUTPUT_DIR` environment variable. This should theoretically work on Windows with iCloud Drive installed, but I haven't tested it. You could also output to a directory that you can drag to iCloud Drive in a web browser, I think.
 
 There are also `build:watch` and `install-modules:watch` scripts that will watch for changes and rebuild the modules automatically, though there may be some latency between when the rebuilt modules are written to iCloud and when your iOS device sees the changes.
 
