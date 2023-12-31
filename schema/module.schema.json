@@ -1,0 +1,42 @@
+{
+    "$id": "https://raw.githubusercontent.com/pacorain/scriptable-modules/master/schema/module.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Module",
+    "description": "Configuration for a Scriptable module. This determines how the module is rolled up into a single file.",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "The language of the module. If not included, the language will be inferred from the file extension.",
+            "type": "string",
+            "enum": [
+                "javascript",
+                "typescript"
+            ]
+        },
+        "name": {
+            "description": "The name of the module. Defaults to the directory name. Affects various parts of the output. Should be a valid JavaScript identifier.",
+            "pattern": "^[a-zA-Z_$][a-zA-Z_$0-9]*$",
+            "type": "string"
+        },
+        "output": {
+            "description": "The output file name. Should be a valid JavaScript identifier. Defaults to the name.",
+            "pattern": "^[a-zA-Z_$][a-zA-Z_$0-9]*$",
+            "type": "string"
+        },
+        "format": {
+            "description": "The format of the output file. Defaults to 'iife'.",
+            "type": "string",
+            "enum": [
+                "amd",
+                "cjs",
+                "es",
+                "iife",
+                "umd"
+            ]
+        },
+        "strict": {
+            "description": "Whether to enable strict mode. Defaults to false.",
+            "type": "boolean"
+        }
+    }
+}
