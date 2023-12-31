@@ -1,0 +1,4 @@
+{
+    "$schema": "https://raw.githubusercontent.com/pacorain/scriptable-modules/master/schema/module.schema.json",
+    "type": "typescript"
+}
