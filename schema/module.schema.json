@@ -24,7 +24,7 @@
             "type": "string"
         },
         "format": {
-            "description": "The format of the output file. Defaults to 'iife'.",
+            "description": "The format of the output file. Defaults to 'cjs', which is recommended for Scriptable.",
             "type": "string",
             "enum": [
                 "amd",

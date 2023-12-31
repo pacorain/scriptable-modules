@@ -7,7 +7,7 @@ const moduleJsonFiles = glob.sync('**/module.json');
 const directories = moduleJsonFiles.map(file => path.dirname(file));
 
 // Get output directory from environment variable SCRIPTABLE_OUTPUT_DIR or default to 'dist'
-const outputDir = process.env.SCRIPTABLE_OUTPUT_DIR || 'dist';
+const outputDir = process.env.MODULE_OUTPUT_DIR || 'dist';
 
 export default directories.map(directory => {
     const moduleConfig = JSON.parse(fs.readFileSync(path.join(directory, 'module.json'), 'utf-8'));
@@ -44,7 +44,7 @@ export default directories.map(directory => {
         input: path.join(directory, moduleConfig.input || (moduleConfig.type === 'typescript' ? 'index.ts' : 'index.js')),
         output: {
             file: path.join(outputDir, `${moduleConfig.output || moduleConfig.name || path.basename(directory)}.js`),
-            format: moduleConfig.format || 'iife',
+            format: moduleConfig.format || 'cjs',
             strict: moduleConfig.strict !== undefined ? moduleConfig.strict : false,
             name: moduleConfig.name || path.basename(directory)
         },
