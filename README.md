@@ -61,4 +61,4 @@ Using pure TypeScript in Scriptable is not possible because it mixes syntaxes of
 
 I use [Jest][] for testing. Unit testing can be completed in the [test](test) folder. There is no enforced structure, but I try to follow the convention of having a {module_name}.spec.ts file for each module. Jest is configured to look for these files, and to run TypeScript tests, in the [jest.config.js](jest.config.js) file.
 
-Scriptable is unique in that it runs JavaScript code in a non-standard environment, where some global variables are mapped directly to iOS APIs. Mocks for Scriptable are stored in [__mocks__/scriptable-ios.js]().
+Scriptable is unique, and runs JavaScript code in a non-standard environment so that some global constants map directly to iOS APIs. This creates a challenge for testing. Any scriptable APIs that are used in the modules must be mocked in the tests. This is done in [test/mocks.ts](). This updates global variables, as long as at least one member is imported from the file.
