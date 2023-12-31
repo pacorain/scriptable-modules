@@ -18,7 +18,7 @@
   },
   "scripts": {
     "build": "rollup --config rollup.config.js",
-    "pretest": "npm run build",
+    "serve": "SCRIPTABLE_OUTPUT_DIR=~/Library/Mobile\\ Documents/iCloud~dk~simonbs~Scriptable/Documents/modules npm run build",
     "test": "jest"
   },
   "repository": {
