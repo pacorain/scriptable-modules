@@ -51,11 +51,13 @@ There are also `build:watch` and `install-modules:watch` scripts that will watch
 
 ## Module Configuration
 
-This repo uses [rollup] to compile TypeScript modules into self-contained JavaScript files. This means each module is a single file.
+This repo uses [rollup][] to compile TypeScript modules into self-contained JavaScript files. This means each module is a single file.
 
 Rollup [is configured](rollup.config.js) looks for modules in the [src](src) folder. Modules are identified by their `module.json` file; this file may contain an empty object (`{}`), but it must exist for the module to be compiled. Each module is then stored in a JavaScript file, by default in the [dist](dist) folder. Unless otherwise specified by the module config, the JavaScript file will have the same name as the module folder.
 
 Using pure TypeScript in Scriptable is not possible because it mixes syntaxes of ES Modules and CommonJS, which is why the modules are compiled with JavaScript.
+
+[rollup]: https://rollupjs.org
 
 ## Module Tests
 
