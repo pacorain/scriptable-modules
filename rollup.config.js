@@ -2,6 +2,7 @@ import path from 'path';
 import glob from 'glob';
 import fs from 'fs';
 import typescript from '@rollup/plugin-typescript';
+import terser from '@rollup/plugin-terser';
 
 const moduleJsonFiles = glob.sync('src/**/module.json');
 const directories = moduleJsonFiles.map(file => path.dirname(file));
@@ -48,6 +49,6 @@ export default directories.map(directory => {
             strict: moduleConfig.strict !== undefined ? moduleConfig.strict : false,
             name: moduleConfig.name || path.basename(directory)
         },
-        plugins: moduleConfig.type === 'typescript' ? [typescript()] : []
+        plugins: moduleConfig.type === 'typescript' ? [typescript(), terser()] : [terser()]
     };
 });
