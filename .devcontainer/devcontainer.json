@@ -3,7 +3,13 @@
 {
 	"name": "Node.js & TypeScript",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"dockerFile": "./Dockerfile"
+	"dockerFile": "./Dockerfile",
+	"mounts": [
+        "source=${localEnv:HOME}/Library/Mobile Documents/iCloud~dk~simonbs~Scriptable/Documents,target=/home/node/scriptable-documents,type=bind"
+    ],
+    "containerEnv": {
+        "SCRIPTABLE_DIR": "/home/node/scriptable-documents"
+    }
 
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
