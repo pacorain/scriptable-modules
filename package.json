@@ -9,6 +9,7 @@
   "version": "2.0.0",
   "type": "module",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/glob": "^8.1.0",
     "@types/jest": "^29.5.11",
