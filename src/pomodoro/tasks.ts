@@ -24,6 +24,9 @@ export class ActivityInventory {
     }
 
     async save() {
-        // TODO: Save to iCloud
+        let icloud = FileManager.iCloud();
+        let path = icloud.joinPath(icloud.documentsDirectory(), "pomodoro/inventory.json");
+        let contents = JSON.stringify(this);
+        icloud.writeString(path, contents);
     }
 }

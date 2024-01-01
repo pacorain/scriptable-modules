@@ -6,15 +6,17 @@ type MockFileManager = {
     joinPath: jest.Mock<string, [string, string]>;
     fileExists: jest.Mock<boolean, [string]>;
     readString: jest.Mock<string, [string]>;
+    writeString: jest.Mock<void, [string, string]>;
 }
 
 export const mockFileManager: MockFileManager = {
     iCloud: jest.fn(),
     local: jest.fn(),
-    documentsDirectory: jest.fn().mockReturnValue("/Documents"),
+    documentsDirectory: jest.fn().mockReturnValue("/FakeDocuments"),
     joinPath: jest.fn((path1: string, path2: string) => path1 + "/" + path2),
     fileExists: jest.fn().mockReturnValue(true),
-    readString: jest.fn().mockReturnValue("{}")
+    readString: jest.fn().mockReturnValue("{}"),
+    writeString: jest.fn(),
 }
 mockFileManager.iCloud.mockReturnValue(mockFileManager);
 mockFileManager.local.mockReturnValue(mockFileManager);
