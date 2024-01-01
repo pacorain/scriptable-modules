@@ -10,9 +10,9 @@ describe('ActivityInventory', () => {
     })
 
     it('loads from iCloud by default', async () => {
-        mockFileManager.fileExists.mockReturnValue(false);
+        mockFileManager.fileExists.mockReturnValue(true);
         await ActivityInventory.load();
         expect(mockFileManager.iCloud).toHaveBeenCalled();
-        expect(mockFileManager.iCloud().readString).toHaveBeenCalledWith('/Documents/pomodoro/inventory.json');
+        expect(mockFileManager.readString).toHaveBeenCalledWith('/Documents/pomodoro/inventory.json');
     })
 })
