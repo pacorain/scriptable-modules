@@ -55,7 +55,7 @@ This repo uses [rollup][] to compile TypeScript modules into self-contained Java
 
 Rollup [is configured](rollup.config.js) looks for modules in the [src](src) folder. Modules are identified by their `module.json` file; this file may contain an empty object (`{}`), but it must exist for the module to be compiled. Each module is then stored in a JavaScript file, by default in the [dist](dist) folder. Unless otherwise specified by the module config, the JavaScript file will have the same name as the module folder.
 
-Using pure TypeScript in Scriptable is not possible because it mixes syntaxes of ES Modules and CommonJS, which is why the modules are compiled with JavaScript.
+Using pure TypeScript to compile Scriptable is not possible because Scriptable appears to only work on ESModule import statements, and CommonJS export statements, which TypeScript does not support. This is why the modules are compiled to JavaScript with rollup. See #2 for more info.
 
 [rollup]: https://rollupjs.org
 
