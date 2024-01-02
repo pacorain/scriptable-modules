@@ -1,1 +1,1 @@
-export { ActivityInventory } from './tasks';
+export { ActivityInventory, Task, OngoingTask, TaskStatus } from './tasks';
