@@ -1,1 +1,3 @@
-export { ActivityInventory, Task, OngoingTask, TaskStatus } from './tasks';
+export { Task, OngoingTask, TaskStatus } from './Task';
+export { ActivityInventory } from './ActivityInventory';
+export { DailyLog } from './DailyLog';
