@@ -42,6 +42,14 @@ export class Task implements ITask {
     restart() {
         this.status = TaskStatus.Todo;
     }
+
+    static deserialize(json: any): ITask {
+        if ('original_estimate' in json) {
+            return Object.assign(new Task("", 0), json);
+        } else {
+            return Object.assign(new OngoingTask(""), json);
+        }
+    }
 }
 
 export class OngoingTask implements ITask {
@@ -89,20 +97,30 @@ export class ActivityInventory {
         return this.tasks.filter(task => task.active)
     }
 
-    static async load() {
+    static load() {
         let icloud = FileManager.iCloud();
         let path = icloud.joinPath(icloud.documentsDirectory(), "pomodoro/inventory.json");
         if (icloud.fileExists(path)) {
             let contents = icloud.readString(path);
             let inventory = JSON.parse(contents);
-            return new ActivityInventory(inventory);
+            return ActivityInventory.deserialize(inventory);
         } else {
             let inventory = new ActivityInventory();
-            await inventory.save();
+            inventory.save();
+            return inventory;
         }
     }
 
-    async save() {
+    static deserialize(json: any) {
+        let inventory = new ActivityInventory();
+        for (let task_obj of json.tasks) {
+            let task = Task.deserialize(task_obj);
+            inventory.addTask(task);
+        }
+        return inventory;
+    }
+
+    save() {
         let icloud = FileManager.iCloud();
         let path = icloud.joinPath(icloud.documentsDirectory(), "pomodoro/inventory.json");
         let contents = JSON.stringify(this);

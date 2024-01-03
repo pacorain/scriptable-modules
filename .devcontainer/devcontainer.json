@@ -9,7 +9,14 @@
     ],
     "containerEnv": {
         "SCRIPTABLE_DIR": "/home/node/scriptable-documents"
-    }
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"Orta.vscode-jest"
+			]
+		}
+	}
 
 
 	// Features to add to the dev container. More info: https://containers.dev/features.

@@ -10,16 +10,14 @@ type MockFileManager = {
 }
 
 export const mockFileManager: MockFileManager = {
-    iCloud: jest.fn(),
-    local: jest.fn(),
+    iCloud: jest.fn(() => mockFileManager),
+    local: jest.fn(() => mockFileManager),
     documentsDirectory: jest.fn().mockReturnValue("/FakeDocuments"),
     joinPath: jest.fn((path1: string, path2: string) => path1 + "/" + path2),
     fileExists: jest.fn().mockReturnValue(true),
-    readString: jest.fn().mockReturnValue("{}"),
+    readString: jest.fn().mockReturnValue('{"tasks": []}'),
     writeString: jest.fn(),
-}
-mockFileManager.iCloud.mockReturnValue(mockFileManager);
-mockFileManager.local.mockReturnValue(mockFileManager);
+};
 
 
 export type ScriptableGlobal = typeof global & {

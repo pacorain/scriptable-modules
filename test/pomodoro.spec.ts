@@ -1,5 +1,15 @@
-import { ActivityInventory, Task, TaskStatus }  from '../src/pomodoro';
+import { ActivityInventory, OngoingTask, Task, TaskStatus }  from '../src/pomodoro';
 import { mockFileManager } from './mocks';
+
+beforeEach(() => {
+    jest.resetAllMocks();
+    mockFileManager.iCloud.mockReturnValue(mockFileManager);
+    mockFileManager.local.mockReturnValue(mockFileManager);
+    mockFileManager.documentsDirectory.mockReturnValue("/FakeDocuments");
+    mockFileManager.joinPath.mockImplementation((path1: string, path2: string) => path1 + "/" + path2);
+    mockFileManager.fileExists.mockReturnValue(true);
+    mockFileManager.readString.mockReturnValue('{"tasks": []}');
+});
 
 describe('Task', () => {
     it('should initialize with a description and estimate', async () => {
@@ -39,16 +49,16 @@ describe('Task', () => {
 });
 
 describe('ActivityInventory', () => {
-    it('should initialize with no tasks', async () => {
+    it('should initialize with no tasks', () => {
         let inventory = new ActivityInventory();
         expect(inventory.tasks.length).toBe(0);
         expect(inventory.activeTasks.length).toBe(0);
         // TODO: If there is a method for calculating effort remaining, test that it is 0
     });
 
-    it('loads from iCloud by default', async () => {
+    it('loads from iCloud by default', () => {
         mockFileManager.fileExists.mockReturnValue(true);
-        await ActivityInventory.load();
+        ActivityInventory.load();
         expect(mockFileManager.iCloud).toHaveBeenCalled();
         expect(mockFileManager.readString).toHaveBeenCalledWith('/FakeDocuments/pomodoro/inventory.json');
     });
@@ -79,4 +89,45 @@ describe('ActivityInventory', () => {
         expect(inventory.tasks[0].description).toBe("Test");
         expect(inventory.tasks[0].original_estimate).toBe(2);
     });
+
+    it('creates a new ongoing task', () => {
+        let inventory = new ActivityInventory();
+        inventory.createOngoingTask("Test");
+        expect(inventory.tasks.length).toBe(1);
+        expect(inventory.tasks[0].description).toBe("Test");
+        expect(inventory.tasks[0].original_estimate).toBeUndefined();
+    });
+
+    it('serializes to JSON', async () => {
+        mockFileManager.writeString.mockClear();
+        let inventory = new ActivityInventory();
+        inventory.createTask("Test", 2);
+        inventory.createOngoingTask("Test2")
+        inventory.save();
+        expect(mockFileManager.writeString).toHaveBeenCalled();
+        let args = mockFileManager.writeString.mock.calls[0];
+        expect(args[0]).toBe('/FakeDocuments/pomodoro/inventory.json');
+        let contents = args[1];
+        let json = JSON.parse(contents);
+        expect(json.tasks.length).toBe(2);
+        expect(json.tasks[0].description).toBe("Test");
+        expect(json.tasks[0].original_estimate).toBe(2);
+        expect(json.tasks[0].hasOwnProperty("active")).toBe(false);
+        expect(json.tasks[1].description).toBe("Test2");
+        expect(json.tasks[1].hasOwnProperty("original_estimate")).toBe(false);
+        expect(json.tasks[1].active).toBe(true);
+    });
+
+    it('restores from JSON', () => {
+        mockFileManager.readString.mockReturnValue('{"tasks":[{"description":"Test","original_estimate":2},{"description":"Test2"}]}');
+        let inventory = ActivityInventory.load();
+        expect(inventory.tasks.length).toBe(2);
+        expect(inventory.tasks[0].description).toBe("Test");
+        expect(inventory.tasks[0].original_estimate).toBe(2);
+        expect(inventory.tasks[0].active).toBe(true);
+        expect(inventory.tasks[1].description).toBe("Test2");
+        expect(inventory.tasks[1].original_estimate).toBeUndefined();
+        expect(inventory.tasks[1].active).toBe(true);
+    });
+
 })
